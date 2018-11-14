@@ -13,9 +13,13 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
+ 
 
-
-
+var callBinding = (magicAnimals, updateAnimal, id) => {
+    let animal = magicAnimals.map(anim=> anim.id===id)
+    updateAnimal.call(animal)
+    return updateAnimal("Trogdor")
+}
 // *************
 // * PROBLEM 2 *
 // *************
@@ -28,9 +32,16 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
+var applyBinding =(magicAnimals, updateAnimal, id) =>{
+    let animal= magicAnimals.map  (anim  => 
+        {if (anim.id ==id)
+             {return anim}
+            } )
+    return updateAnimal.apply(animal[0], 
+        ["being majestic" , "eating rainbows"])
+}
 
-
-
+ 
 // *************
 // * PROBLEM 3 *
 // *************
@@ -45,11 +56,17 @@
 // After the timeout is completed, the promise should be resolved with the new updated foo variable.
 // NOTE: Manually invoking your function here will alter the 'foo' variable before tests run, causing them to fail.
 
-var foo;
-
-// CODE HERE...
 
 
+  var foo;
+
+  var promiseMe = ($q) => {
+      return new Promise((resolve, reject) => {
+          setTimeout(() => 
+          resolve(foo = 'bar'), 20)
+      })
+  }
+  
 
 // *************
 // * PROBLEM 4 *
@@ -64,3 +81,9 @@ var foo;
 // and then resolve the array as you complete your promise.
 
 // CODE HERE...
+var  emailList = ($q, $http) => {
+    return $http({
+        method: 'GET',
+        url: '/api/users'
+    }).then(res => arr = res.data.map(x => x.email))
+}
